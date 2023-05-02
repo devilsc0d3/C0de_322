@@ -12,6 +12,7 @@ public class App {
 		menu.addItem(new MenuItem("Jouer", this::choice_part));
 		menu.addItem(new MenuItem("Continuer", this::last_save));
 		menu.addItem(new MenuItem("Langue", this::language));
+		menu.addItem(new MenuItem("Credit", this::credit));
 		menu.addItem(new MenuItem("Quitter\n", () -> System.out.println("ne dors pas trop longtemps...")));
 		return menu;
 	}
@@ -24,13 +25,19 @@ public class App {
 	}
 
 	public void last_save() {
-		try {
-			System.out.println("hi?");
-			Thread.sleep(500);
+		System.out.println("save ?");
+	}
 
-			System.out.println("yes");
-			Thread.sleep(500);
-			System.out.println("oh! hello");
+	public void credit() {
+		try {
+			System.out.println("- Credit -");
+			Thread.sleep(200);
+			System.out.println("Fauré Léo");
+			Thread.sleep(200);
+			System.out.println("Gregory Armirail");
+			Thread.sleep(200);
+			System.out.println("Lucas Izildy");
+
 
 		} catch (InterruptedException e) {
 			Thread.currentThread().interrupt();
@@ -41,6 +48,19 @@ public class App {
 	public void language() {
 		System.out.println("Bientot Disponible !\n");
 		this.launch();
+	}
+
+	public void test() {
+		try {
+			String phrase = "il était une fois, et fin VA FEN COULOT !";
+			for (int i = 0; i < phrase.length(); i++) {
+				System.out.print(phrase.charAt(i));
+				Thread.sleep(20);
+			}
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
+			System.err.println("La thread a été interrompue pendant la pause");
+		}
 	}
 }
 
