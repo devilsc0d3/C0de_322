@@ -26,6 +26,9 @@ public class Menu {
 			System.out.print("Votre choix : ");
 			try {
 				int menuChoice = this.scanner.nextInt();
+				if (menuChoice == 666) {
+					System.out.println("...Votre fin est proche...\n\n");
+				}
 				if(menuChoice <= this.items.size() && menuChoice > 0) {
 					this.items.get(menuChoice - 1).execute();
 					end = true;
