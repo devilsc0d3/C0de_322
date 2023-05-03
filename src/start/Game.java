@@ -8,7 +8,7 @@ public class Game {
     private int day = 0;
     private boolean game = true;
 
-    List<Character> pj = new ArrayList<>();;
+    List<Character> pj = new ArrayList<>();
 
     public int getDay() {
         return this.day;
@@ -21,8 +21,8 @@ public class Game {
     public void hebdo() {
         while (game) {
             Menu menu = new Menu( "\n-- day : "+ getDay() + " --");
-            menu.addItem(new MenuItem("next", this::next));
-            menu.addItem(new MenuItem("quite", this::quite));
+            menu.addItem(new MenuItem("continuer", this::next));
+            menu.addItem(new MenuItem("quitter", this::quite));
             menu.displayAndWaitChoice();
         }
     }
