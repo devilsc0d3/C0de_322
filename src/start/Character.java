@@ -2,13 +2,16 @@ package start;
 
 public class Character {
     private int thirty;
-    private String name;
+    private final String name;
     private int hunger;
+
+    private int crazy;
 
     public Character(String name) {
         this.name = name;
         this.thirty = 2;
         this.hunger = 4;
+        this.crazy = 4;
     }
 
     public int getHunger() {
@@ -20,7 +23,7 @@ public class Character {
     }
 
     public void setThirty(int thirty) {
-        this.thirty = thirty;
+        this.thirty -= thirty;
     }
 
     public String getName() {
@@ -28,11 +31,15 @@ public class Character {
     }
 
     public void setHunger(int hunger) {
-        this.hunger = hunger;
+        this.hunger -= hunger;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCrazy(int crazy) {
+        this.crazy -= crazy;
+    }
+
+    public int getCrazy() {
+        return crazy;
     }
 }
 

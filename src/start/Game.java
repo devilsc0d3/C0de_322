@@ -1,10 +1,12 @@
 package start;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Game {
+    private String log;
     private int day = 0;
     private boolean game = true;
 
@@ -38,13 +40,46 @@ public class Game {
     }
 
     public void next() {
-        setDay(1);
-        hebdo();
+        int i = 0;
+        while (i < pj.size()) {
+            pj.get(i).setHunger(1);
+            pj.get(i).setThirty(1);
+
+            if (pj.get(i).getHunger() == 0 || pj.get(i).getThirty() == 0) {
+                System.out.println(pj.get(i).getName() + " est mort(e)");
+                pj.remove(pj.get(i));
+            } else {
+                i++;
+            }
+        }
+
+        if (pj.size() == 0) {
+            end();
+        } else {
+            setDay(1);
+            hebdo();
+        }
     }
 
     public void quite() {
         System.out.println("partie perdue...");
         game = false;
+    }
+
+    public void end() {
+        try {
+            String txt = "ils sont venus me chercher et il ne rester plus personne pour dire quelque chose...\n";
+            for (int i = 0; i < txt.length(); i++) {
+                System.out.print(txt.charAt(i));
+                Thread.sleep(40);
+            }
+            this.game = false;
+            App app = new App();
+            app.launch();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.err.println("La thread a été interrompue pendant la pause");
+        }
     }
 
     public void check() {
