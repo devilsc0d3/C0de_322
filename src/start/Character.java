@@ -23,7 +23,7 @@ public class Character {
     }
 
     public void setThirty(int thirty) {
-        this.thirty -= thirty;
+        this.thirty += thirty;
     }
 
     public String getName() {
@@ -31,7 +31,7 @@ public class Character {
     }
 
     public void setHunger(int hunger) {
-        this.hunger -= hunger;
+        this.hunger += hunger;
     }
 
     public void setCrazy(int crazy) {

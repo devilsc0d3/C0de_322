@@ -44,6 +44,8 @@ public class App {
 		System.out.println("-c0de 322 est un jeu de simulation et de strategie");
 		System.out.println("-Le nom 'c0de_322' fait référence à l'article 323-1 du Code pénal français qui réprime les activités de hacking,");
 		System.out.println(" le hacking peut etre un outil bénéfique pour contrer la prise de contrôle de la planète par des robots...");
+		typing("\n Version : 0.02a\n",200);
+
 		launch();
 	}
 
