@@ -1,10 +1,27 @@
 package start;
 
+import com.google.gson.Gson;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class App {
 
 	public void launch() {
 		Menu menu = this.generateMainMenu();
 		menu.displayAndWaitChoice();
+	}
+
+	public Game read(String filePath) {
+		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+			Gson gson = new Gson();
+			String json = reader.readLine();
+			return gson.fromJson(json, Game.class);
+		} catch (IOException e) {
+			System.err.println("Error reading game file: " + e.getMessage());
+			return null;
+		}
 	}
 
 	public Menu generateMainMenu() {
@@ -32,7 +49,8 @@ public class App {
 	}
 
 	public void last_save() {
-		System.out.println("save ?");
+		Game game = read("./game_data.json");
+		game.hebdo();
 	}
 
 	public void credit() {
@@ -44,7 +62,7 @@ public class App {
 		System.out.println("-c0de 322 est un jeu de simulation et de strategie");
 		System.out.println("-Le nom 'c0de_322' fait référence à l'article 323-1 du Code pénal français qui réprime les activités de hacking,");
 		System.out.println(" le hacking peut etre un outil bénéfique pour contrer la prise de contrôle de la planète par des robots...");
-		typing("\n Version : 0.02a\n",200);
+		typing("\n Version : 0.03a\n",200);
 
 		launch();
 	}

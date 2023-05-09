@@ -1,10 +1,17 @@
 package start;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import com.google.gson.Gson;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
-public class Game {
+public class Game implements Serializable {
+    //TODO need save method with gsobnà
     private int day = 0;
     private boolean game = true;
 
@@ -94,11 +101,12 @@ public class Game {
 
     public void quite() {
         System.out.println("partie perdue...");
+        save();
         game = false;
     }
 
     public void badEnd() {
-        typing("ils sont venus me chercher et il ne rester plus personne pour dire quelque chose...\n", 40);
+        typing("ils sont venus me chercher et il ne rester plus personne pour dire quelque chose...\n", 190);
         this.game = false;
         restart();
     }
@@ -113,15 +121,31 @@ public class Game {
         app.launch();
     }
 
+    public void ok() {
+        System.out.println("ok");
+    }
+
+    public void save() {
+        Gson gson = new Gson();
+        String json = gson.toJson(this);
+
+        try (FileWriter writer = new FileWriter("game_data.json")) {
+            writer.write(json);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void typing(String txt, int time) {
-        try {
-            for (int i = 0; i < txt.length(); i++) {
-                System.out.print(txt.charAt(i));
+        for (int i = 0; i < txt.length(); i++) {
+            System.out.print(txt.charAt(i));
+            try {
                 Thread.sleep(time);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                System.err.println("La thread a été interrompue pendant la pause");
+                break;
             }
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            System.err.println("La thread a été interrompue pendant la pause");
         }
     }
 }
