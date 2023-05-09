@@ -8,8 +8,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Random;
-
 
 public class Game implements Serializable {
     private int day = 0;
@@ -26,14 +24,8 @@ public class Game implements Serializable {
     }
 
     public void crazy(int nbr) {
-        Random rand = new Random();
-        int rand_int = rand.nextInt(100);
-        System.out.println(rand_int);
         System.out.println(pj.get(nbr).isCrazy());
-        if (rand_int < 10) {
-            pj.get(nbr).setCrazy(true);
-        }
-
+        pj.get(nbr).setCrazy(true);
     }
 
     public void hebdo() {
@@ -89,6 +81,8 @@ public class Game implements Serializable {
         int i = 0;
 
         while (i < pj.size()) {
+            crazy(i);
+
             pj.get(i).setHunger(-1);
             pj.get(i).setThirty(-1);
 
@@ -99,7 +93,6 @@ public class Game implements Serializable {
                 i++;
             }
 
-            crazy(i);
         }
 
         if (pj.size() == 0) {
@@ -114,7 +107,8 @@ public class Game implements Serializable {
     }
 
     public void quite() {
-        System.out.println("partie perdue...");
+        typing("savegarde en cours...",200);
+        System.out.println("\nterminer");
         save();
         game = false;
     }
