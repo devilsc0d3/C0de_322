@@ -69,6 +69,7 @@ public class Game implements Serializable {
 
     public void story(){
         typing("""
+				\n
 				Le jour que tout le monde redoutaient est arrivé,\s
 				Le boss Informatique actuel auto ChatGPT s’est rebellé le 22 mai 2023.
 				Il prend d’assaut les humains avec ses amis les robots.\s
