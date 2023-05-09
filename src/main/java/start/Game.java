@@ -1,17 +1,17 @@
 package start;
 
+import com.google.gson.Gson;
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import com.google.gson.Gson;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.util.Random;
+
 
 public class Game implements Serializable {
-    //TODO need save method with gsobnà
     private int day = 0;
     private boolean game = true;
 
@@ -23,6 +23,17 @@ public class Game implements Serializable {
 
     public void setDay(int nbr) {
         this.day += nbr;
+    }
+
+    public void crazy(int nbr) {
+        Random rand = new Random();
+        int rand_int = rand.nextInt(100);
+        System.out.println(rand_int);
+        System.out.println(pj.get(nbr).isCrazy());
+        if (rand_int < 10) {
+            pj.get(nbr).setCrazy(true);
+        }
+
     }
 
     public void hebdo() {
@@ -65,17 +76,18 @@ public class Game implements Serializable {
     }
 
     public void story(){
-//        typing("""
-//				Le jour que tout le monde redoutaient est arrivé,\s
-//				Le boss Informatique actuel auto ChatGPT s’est rebellé le 22 mai 2023.
-//				Il prend d’assaut les humains avec ses amis les robots.\s
-//				Le monde est en train de sombrer mais un groupe de bras cassé est détérminé a renverser les IA.
-//				Arriveront-ils a restituer la paix ?
-//				""", 40);
+        typing("""
+				Le jour que tout le monde redoutaient est arrivé,\s
+				Le boss Informatique actuel auto ChatGPT s’est rebellé le 22 mai 2023.
+				Il prend d’assaut les humains avec ses amis les robots.\s
+				Le monde est en train de sombrer mais un groupe de bras cassé est détérminé a renverser les IA.
+				Arriveront-ils a restituer la paix ?
+				""", 40);
     }
 
     public void next() {
         int i = 0;
+
         while (i < pj.size()) {
             pj.get(i).setHunger(-1);
             pj.get(i).setThirty(-1);
@@ -86,6 +98,8 @@ public class Game implements Serializable {
             } else {
                 i++;
             }
+
+            crazy(i);
         }
 
         if (pj.size() == 0) {
@@ -119,10 +133,6 @@ public class Game implements Serializable {
     public void restart() {
         App app = new App();
         app.launch();
-    }
-
-    public void ok() {
-        System.out.println("ok");
     }
 
     public void save() {

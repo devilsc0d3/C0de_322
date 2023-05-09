@@ -20,7 +20,7 @@ public class Menu {
 		do {
 			System.out.println(this.name);
 			for(int i=0; i< items.size(); i++) {
-				String line = String.format("%d - %s", i+1, this.items.get(i).getLabel());
+				String line = String.format("%d - %s", i+1, this.items.get(i).label());
 				System.out.println(line);
 			}
 			System.out.print("Votre choix : ");

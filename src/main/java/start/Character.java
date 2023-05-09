@@ -5,13 +5,13 @@ public class Character {
     private final String name;
     private int hunger;
 
-    private int crazy;
+    private boolean crazy;
 
     public Character(String name) {
         this.name = name;
         this.thirty = 2;
         this.hunger = 4;
-        this.crazy = 4;
+        this.crazy = true;
     }
 
     public int getHunger() {
@@ -34,11 +34,11 @@ public class Character {
         this.hunger += hunger;
     }
 
-    public void setCrazy(int crazy) {
-        this.crazy -= crazy;
+    public void setCrazy(boolean crazy) {
+        this.crazy = crazy;
     }
 
-    public int getCrazy() {
+    public boolean isCrazy() {
         return crazy;
     }
 }
