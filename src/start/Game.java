@@ -10,43 +10,41 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Game extends BackgroundImage {
+public class Game extends JPanel {
     private JPanel canPanel;
     private JPanel bottlePanel;
 
     Game() {
-//        ImageIcon icon = new ImageIcon("logo.jpg");
-//        this.setIconImage(icon.getImage());
-        this.setBackground(Color.black);
+
+        setBackground(Color.black);
         setLayout(new BorderLayout());
+        initChoicePanel();
 
         JPanel indicatorPanel = new JPanel(new GridLayout(2,0));
-        indicatorPanel.setBackground(new Color(0, 0, 0, 0));
+        indicatorPanel.setOpaque(false);
         indicatorPanel.setPreferredSize(new Dimension(0, 150));
 
         bottlePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         canPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        bottlePanel.setSize(500, 400);
-        canPanel.setSize(500, 400);
+        bottlePanel.setPreferredSize(new Dimension(50, 400));
+        canPanel.setPreferredSize(new Dimension(50, 400));
         bottlePanel.setBackground(new Color(0, 0, 0, 0));
         canPanel.setBackground(new Color(0, 0, 0, 0));
 
+        updateGameStat(15,15);
+
         indicatorPanel.add(bottlePanel);
         indicatorPanel.add(canPanel);
-        this.add(indicatorPanel, BorderLayout.NORTH);
+        add(indicatorPanel, BorderLayout.NORTH);
+    }
+    private void initChoicePanel(){
+        JPanel choicePanel = new JPanel();
+        choicePanel.setBackground(Color.red);
+        choicePanel.setPreferredSize(new Dimension(200,900));
+        add(choicePanel,BorderLayout.EAST);
     }
 
-    public void displayCharacters(){
-        JPanel charactersPanel = new JPanel(new FlowLayout());
-        Dad dad = new Dad();
-        Mom mom = new Mom();
-        charactersPanel.add(dad);
-        charactersPanel.add(mom);
-        charactersPanel.setPreferredSize(new Dimension(getWidth(),500));
-        charactersPanel.setOpaque(false);
-        add(charactersPanel,BorderLayout.SOUTH);
-//        add(emptyPanel,BorderLayout.SOUTH);
-    }
+
 
 
     private void addWaterBottle() {

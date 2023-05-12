@@ -2,6 +2,7 @@ package start;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
 
 class BackgroundImage extends JPanel {
     private final Image backgroundImage;
@@ -9,7 +10,7 @@ class BackgroundImage extends JPanel {
 
     public BackgroundImage() {
         setBackground(Color.black);
-        ImageIcon img = new ImageIcon(BackgroundImage.class.getResource("background.jpg"));
+        ImageIcon img = new ImageIcon(Objects.requireNonNull(BackgroundImage.class.getResource("background.jpg")));
         backgroundImage = img.getImage().getScaledInstance(800, 600, Image.SCALE_DEFAULT);
         alpha = 1.0f; // Initial opacity
     }
