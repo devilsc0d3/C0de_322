@@ -22,6 +22,7 @@ public class MainGamePanel extends JLayeredPane {
 
     public void addGamePanel() {
         gamePanel = new Game();
+        gamePanel.updateGameStat(15,10);
         gamePanel.setBounds(0, 0, 1600, 850);
         add(gamePanel, JLayeredPane.PALETTE_LAYER);
     }
