@@ -13,7 +13,7 @@ public class PromptPanel extends JPanel {
         setBackground(new Color(0, 0, 0, 200));
         setPreferredSize(new Dimension(600, 900));
         addDaySelectors();
-        addCharactersHeads();
+        addSouthPanel();
     }
 
     private void addDaySelectors() {
@@ -47,6 +47,7 @@ public class PromptPanel extends JPanel {
             JPanel textPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
             textPanel.setOpaque(false);
             JTextArea textArea = new JTextArea();
+            textPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY,3));
             textArea.setPreferredSize(new Dimension(600, 300));
             textArea.setLineWrap(true);
             textArea.setWrapStyleWord(true);
@@ -56,7 +57,7 @@ public class PromptPanel extends JPanel {
             textPanel.add(textArea);
             add(textPanel, BorderLayout.CENTER);
 
-            timer = new Timer(6, e -> {
+            timer = new Timer(60, e -> {
                 if (x[0] < textToDisplay.length()) {
                     String partialText = textToDisplay.substring(0, x[0]) + "|";
                     textArea.setText(partialText);
@@ -74,8 +75,41 @@ public class PromptPanel extends JPanel {
 
         }
     }
-    private void addCharactersHeads(){
-        JPanel headsPanel = new JPanel();
+    private static ImageIcon resize(ImageIcon baseImage){
+        Image scaledImage = baseImage.getImage().getScaledInstance(50, 75, Image.SCALE_AREA_AVERAGING);
+        return new ImageIcon(scaledImage);
+    }
 
+    private void addSouthPanel(){
+        JPanel southPanel = new JPanel(new BorderLayout());
+        JPanel headsPanel = new JPanel(new FlowLayout());
+        headsPanel.setPreferredSize(new Dimension(600,150));
+
+        JPanel foodPanel = new JPanel(new FlowLayout());
+        foodPanel.setOpaque(false);
+
+        JLabel momHead = new JLabel( new ImageIcon(this.getClass().getResource("mom-head.png")));
+        JLabel dadHead = new JLabel(new ImageIcon(this.getClass().getResource("dad-head.png")));
+        JLabel canLab = new JLabel(resize(new ImageIcon(this.getClass().getResource("soup-can.png"))));
+        JLabel bottleLab = new JLabel(resize(new ImageIcon(this.getClass().getResource("water-bottle.png"))));
+        JLabel canLab2 = new JLabel(resize(new ImageIcon(this.getClass().getResource("soup-can.png"))));
+        JLabel bottleLab2 = new JLabel(resize(new ImageIcon(this.getClass().getResource("water-bottle.png"))));
+
+        southPanel.setOpaque(false);
+        headsPanel.setOpaque(false);
+
+        foodPanel.add(new JButton("-"));
+        foodPanel.add(canLab);
+        foodPanel.add(new JButton("+"));
+        foodPanel.add(new JButton("-"));
+        foodPanel.add(bottleLab);
+        foodPanel.add(new JButton("+"));
+
+        headsPanel.add(momHead);
+        headsPanel.add(dadHead);
+
+        southPanel.add(headsPanel,BorderLayout.NORTH);
+        southPanel.add(foodPanel,BorderLayout.SOUTH);
+        add(southPanel,BorderLayout.SOUTH);
     }
 }
