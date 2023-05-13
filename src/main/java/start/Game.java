@@ -9,11 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Game implements Serializable {
+public class Game {
     private int day = 0;
     private boolean game = true;
 
+    private List<String> log = List.of(new String[]{"rien"});
+
     List<Character> pj = new ArrayList<>();
+    List<Character> expedition = new ArrayList<>();
 
     public int getDay() {
         return this.day;
@@ -28,7 +31,8 @@ public class Game implements Serializable {
         pj.get(nbr).setCrazy(true);
     }
 
-    public void hebdo() {
+    public void daily() {
+        log();
         while (game) {
             Menu menu = new Menu( "\n-- day : "+ getDay() + " --");
             for (int i = 0 ; i < pj.size() ; i++) {
@@ -49,11 +53,11 @@ public class Game implements Serializable {
 
     public void eat(int nbr) {
         pj.get(nbr).setHunger(3);
-       this.hebdo();
+       this.daily();
     }
     public void drink(int nbr) {
         pj.get(nbr).setThirty(2);
-        this.hebdo();
+        this.daily();
     }
 
     public void create(int nbr) {
@@ -64,19 +68,31 @@ public class Game implements Serializable {
             pj.add(character);
         }
         story();
-        hebdo();
+        daily();
     }
 
     public void story(){
+        System.out.println("\n-------------------------------------------- " + "Histoire" + " --------------------------------------------");
         typing("""
-				\n
 				Le jour que tout le monde redoutaient est arrivé,\s
 				Le boss Informatique actuel auto ChatGPT s’est rebellé le 22 mai 2023.
 				Il prend d’assaut les humains avec ses amis les robots.\s
 				Le monde est en train de sombrer mais un groupe de bras cassé est détérminé a renverser les IA.
 				Arriveront-ils a restituer la paix ?
 				""", 40);
+        System.out.println("---------------------------------------------" + "--------" + "---------------------------------------------");
+
     }
+
+    public void log() {
+        System.out.println("\n-------------------------------------------- " + "log" + " --------------------------------------------");
+//        System.out.println(log.get(day));
+        System.out.println("\n\n\n\n\n\n\n");
+        System.out.println("---------------------------------------------" + "---" + "---------------------------------------------");
+
+    }
+
+
 
     public void next() {
         int i = 0;
@@ -96,21 +112,23 @@ public class Game implements Serializable {
 
         }
 
+        log.add("day : " + day);
+
         if (pj.size() == 0) {
             badEnd();
         } else if (day == 10) {
             goodEnd();
         } else {
             setDay(1);
-            hebdo();
+            daily();
         }
 
     }
 
     public void quite() {
-        typing("savegarde en cours...",200);
+        typing("sauvegarde...",200);
         System.out.println("\nterminer");
-        save();
+        save("game_data.json");
         game = false;
     }
 
@@ -130,11 +148,11 @@ public class Game implements Serializable {
         app.launch();
     }
 
-    public void save() {
+    public void save(String path) {
         Gson gson = new Gson();
         String json = gson.toJson(this);
 
-        try (FileWriter writer = new FileWriter("game_data.json")) {
+        try (FileWriter writer = new FileWriter(path)) {
             writer.write(json);
         } catch (IOException e) {
             e.printStackTrace();

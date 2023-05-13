@@ -50,7 +50,7 @@ public class App {
 
 	public void last_save() {
 		Game game = read("./game_data.json");
-		game.hebdo();
+		game.daily();
 	}
 
 	public void credit() {
