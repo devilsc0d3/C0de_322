@@ -2,11 +2,8 @@ package start;
 
 import javax.swing.*;
 import java.awt.*;
-
-import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Objects;
 
 public class Game extends JPanel {
     private final JPanel canPanel;
@@ -61,7 +58,7 @@ public class Game extends JPanel {
     }
 
     private void addWaterBottle() {
-        ImageIcon waterImg = new ImageIcon("src/main/java/start/water-bottle.png");
+        ImageIcon waterImg = new ImageIcon("source/img/water-bottle.png");
         Image scaledImage = waterImg.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
 
@@ -73,7 +70,7 @@ public class Game extends JPanel {
     }
 
     private void addFoodCan() {
-        ImageIcon waterImg = new ImageIcon("src/main/java/start/soup-can.png");
+        ImageIcon waterImg = new ImageIcon("source/img/soup-can.png");
         Image scaledImage = waterImg.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
 

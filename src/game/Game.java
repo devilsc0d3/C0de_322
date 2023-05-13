@@ -125,8 +125,8 @@ public class Game {
 
     public void quite() {
         typing("sauvegarde...",200);
+        save("./source/save/game_data.json");
         System.out.println("\nterminer");
-        save("game_data.json");
         game = false;
     }
 

@@ -2,7 +2,6 @@ package start;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Objects;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,7 +14,7 @@ public class Main {
         frame.setResizable(false);
         frame.setSize(new Dimension(1600,900));
 
-        ImageIcon icon = new ImageIcon("src/main/java/start/logo.jpg");
+        ImageIcon icon = new ImageIcon("source/img/logo.jpg");
         frame.setIconImage(icon.getImage());
         frame.getContentPane().add(mainPanel);
 

@@ -49,7 +49,7 @@ public class App {
 	}
 
 	public void last_save() {
-		Game game = read("./game_data.json");
+		Game game = read("./source/save/game_data.json");
 		game.daily();
 	}
 
