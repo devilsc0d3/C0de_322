@@ -20,7 +20,7 @@ public class MainContentPanel extends JPanel {
             });
         });
 
-        add(menuPanel, "menu");
         add(mainGamePanel, "game");
+        add(menuPanel, "menu");
     }
 }

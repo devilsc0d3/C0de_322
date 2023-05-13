@@ -31,9 +31,9 @@ public class StartMenu extends BackgroundImage {
         buttonPanel.add(Box.createHorizontalGlue());
 
         add(Box.createVerticalGlue());
-        add(titlePanel); // Add the title panel first
+        add(titlePanel);
         add(Box.createVerticalGlue());
-        add(buttonPanel); // Add the button panel next
+        add(buttonPanel);
         add(Box.createVerticalGlue());
     }
 }

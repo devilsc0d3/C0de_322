@@ -8,12 +8,13 @@ import java.util.Objects;
 
 public class LeftPanel extends JPanel {
     private final Map<JPanel, String> componentToConstraints = new HashMap<>();
+    private static PromptPanel promptPanel;
 
     public LeftPanel(){
         setLayout(new CardLayout());
         setOpaque(false);
 
-        PromptPanel promptPanel = new PromptPanel();
+        promptPanel = new PromptPanel();
         JPanel inviPanel = new JPanel();
         inviPanel.setOpaque(false);
 
@@ -25,10 +26,11 @@ public class LeftPanel extends JPanel {
 
     }
 
-    public void goInvi(){
+    public void swapPrompt(){
         CardLayout cardLayout = (CardLayout) this.getLayout();
         if (!Objects.equals(getDisplayedCard(), "PROMPT")){
             cardLayout.show(this,"prompt");
+            promptPanel.addPromptLabel();
         }else{
             cardLayout.show(this,"invi");
         }

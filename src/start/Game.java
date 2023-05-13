@@ -48,14 +48,14 @@ public class Game extends JPanel {
         clickableCompsPanel.mom.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
-                leftPanel.goInvi();
+                leftPanel.swapPrompt();
 
             }
         });
         clickableCompsPanel.openJournalPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
-                leftPanel.goInvi();
+                leftPanel.swapPrompt();
             }
         });
     }
