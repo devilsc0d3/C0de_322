@@ -15,7 +15,7 @@ public class StartMenu extends BackgroundImage {
         JLabel titleLabel = new JLabel("CODE_322");
         titlePanel.setOpaque(false);
         titleLabel.setFont(new Font(Font.SERIF, Font.BOLD, 140));
-        titleLabel.setForeground(Color.BLACK);
+        titleLabel.setForeground(Color.GRAY);
         titlePanel.add(titleLabel);
 
         JPanel buttonPanel = new JPanel();
