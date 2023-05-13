@@ -16,17 +16,11 @@ public class MainContentPanel extends JPanel {
             menuPanel.fadeOut(() -> {
                 CardLayout cardLayout = (CardLayout) this.getLayout();
                 cardLayout.show(this, "game");
-                mainGamePanel.gamePanel.updateGameStat(15,10);
-                mainGamePanel.backgroundPanel.fadeIn(); // Not sure what this does, so commented out for now
-                mainGamePanel.addGamePanel();
+                mainGamePanel.backgroundPanel.fadeIn();
             });
         });
 
-
-        // Add both panels to the main panel
         add(menuPanel, "menu");
         add(mainGamePanel, "game");
-
     }
-
 }

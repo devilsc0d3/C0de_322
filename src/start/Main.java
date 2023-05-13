@@ -9,7 +9,7 @@ public class Main {
 
         JFrame frame = new JFrame();
         MainContentPanel mainPanel = new MainContentPanel();
-        frame.setTitle("60 Seconds");
+        frame.setTitle("CODE_322");
 
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
