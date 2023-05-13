@@ -12,10 +12,10 @@ public class StartMenu extends BackgroundImage {
 
         titlePanel = new JPanel();
         titlePanel.setLayout(new BoxLayout(titlePanel,BoxLayout.X_AXIS));
-        JLabel titleLabel = new JLabel("60 SECONDS");
+        JLabel titleLabel = new JLabel("CODE_322");
         titlePanel.setOpaque(false);
         titleLabel.setFont(new Font(Font.SERIF, Font.BOLD, 140));
-        titleLabel.setForeground(Color.WHITE);
+        titleLabel.setForeground(Color.BLACK);
         titlePanel.add(titleLabel);
 
         JPanel buttonPanel = new JPanel();
