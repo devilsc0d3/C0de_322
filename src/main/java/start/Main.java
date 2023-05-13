@@ -15,7 +15,7 @@ public class Main {
         frame.setResizable(false);
         frame.setSize(new Dimension(1600,900));
 
-        ImageIcon icon = new ImageIcon(Objects.requireNonNull(Main.class.getResource("logo.jpg")));
+        ImageIcon icon = new ImageIcon("src/main/java/start/logo.jpg");
         frame.setIconImage(icon.getImage());
         frame.getContentPane().add(mainPanel);
 
