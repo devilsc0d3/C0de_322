@@ -1,4 +1,4 @@
-package start;
+package game;
 
 public class Character {
     private int thirty;

@@ -1,10 +1,9 @@
-package start;
+package game;
 
 import com.google.gson.Gson;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -112,7 +111,6 @@ public class Game {
 
         }
 
-        log.add("day : " + day);
 
         if (pj.size() == 0) {
             badEnd();

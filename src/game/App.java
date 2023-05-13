@@ -1,4 +1,4 @@
-package start;
+package game;
 
 import com.google.gson.Gson;
 
