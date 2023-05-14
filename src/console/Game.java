@@ -11,7 +11,8 @@ import java.util.Scanner;
 public class Game {
     private int day = 0;
     private int timeExpedition = 2;
-    private List<String> log = List.of(new String[]{"rien"});
+    private List<String> log = new ArrayList<>();
+    private String logtemp = "";
     List<Character> characters = new ArrayList<>();
     List<Character> expedition = new ArrayList<>();
 
@@ -30,7 +31,7 @@ public class Game {
 
     public Menu daily() {
         log();
-        Menu menu = new Menu( "\n-- day2 : "+ getDay() + " --");
+        Menu menu = new Menu( "\n-- day : "+ getDay() + " --");
         for (int i = 0; i < characters.size() ; i++) {
             int finalI = i;
             menu.addItem(new MenuItem("nourir " + characters.get(i).getName(), () -> eat(finalI)));
@@ -68,7 +69,8 @@ public class Game {
             Character character = new Character(name.nextLine());
             characters.add(character);
         }
-        story();
+//        story();
+        logCharacter();
         menuDaily();
     }
 
@@ -85,15 +87,13 @@ public class Game {
     }
 
     public void log() {
-        System.out.println("\n-------------------------------------------- " + "log" + " --------------------------------------------");
-//        System.out.println(log.get(day));
-        System.out.println("\n\n\n\n\n\n\n");
-        System.out.println("---------------------------------------------" + "---" + "---------------------------------------------");
+        System.out.println("\n--------------------- " + "log" + " ------------------------------");
+        System.out.print(log.get(day));
+        System.out.println("-----------------------" + "---" + "-------------------------------");
     }
 
     public void keepGoingStory() {
         int i = 0;
-
         if (timeExpedition == 1) {
             timeExpedition = 8;
             Menu menu = this.expedition();
@@ -109,13 +109,12 @@ public class Game {
             }
 
             while (i < characters.size()) {
-                crazy(i);
 
                 characters.get(i).setHunger(-1);
                 characters.get(i).setThirty(-1);
 
-                if (characters.get(i).getHunger() == 0 || characters.get(i).getThirty() == 0) {
-                    System.out.println(characters.get(i).getName() + " est mort(e)");
+                if (characters.get(i).getHunger() == -1 || characters.get(i).getThirty() == -1) {
+                    logtemp += (characters.get(i).getName() + " est mort(e)\n");
                     characters.remove(characters.get(i));
                 } else {
                     i++;
@@ -124,9 +123,10 @@ public class Game {
 
             if (characters.size() == 0 && expedition.size() == 0) {
                 badEnd();
-            } else if (day == 10) {
+            } else if (day == 404) {
                 goodEnd();
             } else {
+                logCharacter();
                 setDay(1);
                 menuDaily();
             }
@@ -191,8 +191,36 @@ public class Game {
             Character character = characters.remove(index);
             expedition.add(character);
         }
+        logCharacter();
+        setDay(1);
         menuDaily();
+
     }
+
+    public void logCharacter() {
+            String logday = "";
+            for (int i = 0; i < characters.size(); i++) {
+
+                if (characters.get(i).getThirty() == 0) {
+                    logday += characters.get(i).getName() + " est désydrater" + "\n";
+                } else if (characters.get(i).getThirty() == 1) {
+                    logday += characters.get(i).getName() + " commence a avoir soif" + "\n";
+                } else {
+                    logday += characters.get(i).getName() + " n'a pas envie de boire" + "\n";
+                }
+
+                if (characters.get(i).getHunger() == 0) {
+                    logday += (characters.get(i).getName() + " est affamé") + "\n";
+                } else if (characters.get(i).getThirty() == 1) {
+                    logday += (characters.get(i).getName() + " commence a avoir faim") + "\n";
+                } else {
+                    logday += (characters.get(i).getName() + " n'a pas envie de manger") + "\n";
+                }
+            }
+            logday += logtemp;
+            log.add(logday);
+            System.out.println(log);
+        }
 
 }
 
