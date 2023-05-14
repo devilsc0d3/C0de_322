@@ -1,4 +1,4 @@
-package game;
+package console;
 
 import com.google.gson.Gson;
 
@@ -49,8 +49,9 @@ public class App {
 	}
 
 	public void last_save() {
-		Game game = read("./source/save/game_data.json");
-		game.daily();
+		Game game = read("./game_data.json");
+		game.test();
+
 	}
 
 	public void credit() {

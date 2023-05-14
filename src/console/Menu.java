@@ -1,4 +1,4 @@
-package game;
+package console;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ public class Menu {
 					this.items.get(menuChoice - 1).execute();
 					end = true;
 				} else {
-					System.out.println("Saisie invalide");
+					System.out.println("Saisie invalide2");
 				}
 			}catch(Exception e) {
 				System.out.println("Saisie invalide");
