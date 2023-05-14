@@ -1,4 +1,4 @@
-package start;
+package main.java.start;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

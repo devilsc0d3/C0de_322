@@ -1,4 +1,4 @@
-package start;
+package main.java.start;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +9,7 @@ class BackgroundImage extends JPanel {
 
     public BackgroundImage() {
         setBackground(Color.black);
-        ImageIcon img = new ImageIcon("source/img/background.jpg");
+        ImageIcon img = new ImageIcon("C0de_322/source/img/background.jpg");
         backgroundImage = img.getImage().getScaledInstance(800, 600, Image.SCALE_DEFAULT);
         alpha = 1.0f; // Initial opacity
     }
