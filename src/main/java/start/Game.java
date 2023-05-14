@@ -58,7 +58,7 @@ public class Game extends JPanel {
     }
 
     private void addWaterBottle() {
-        ImageIcon waterImg = new ImageIcon("source/img/water-bottle.png");
+        ImageIcon waterImg = new ImageIcon("C0de_322/source/img/water-bottle.png");
         Image scaledImage = waterImg.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
 
@@ -70,7 +70,7 @@ public class Game extends JPanel {
     }
 
     private void addFoodCan() {
-        ImageIcon waterImg = new ImageIcon("source/img/soup-can.png");
+        ImageIcon waterImg = new ImageIcon("C0de_322/source/img/soup-can.png");
         Image scaledImage = waterImg.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
 

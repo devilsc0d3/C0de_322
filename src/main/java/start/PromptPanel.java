@@ -45,8 +45,8 @@ public class PromptPanel extends JPanel {
             final int[] x = {6};
 
             JPanel textPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-            textPanel.setOpaque(false);
             JTextArea textArea = new JTextArea();
+            textPanel.setBackground(Color.black);
             textPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY,3));
             textArea.setPreferredSize(new Dimension(600, 300));
             textArea.setLineWrap(true);
@@ -76,7 +76,7 @@ public class PromptPanel extends JPanel {
         }
     }
     private static ImageIcon resize(ImageIcon baseImage){
-        Image scaledImage = baseImage.getImage().getScaledInstance(50, 75, Image.SCALE_AREA_AVERAGING);
+        Image scaledImage = baseImage.getImage().getScaledInstance(75, 75, Image.SCALE_AREA_AVERAGING);
         return new ImageIcon(scaledImage);
     }
 
@@ -85,31 +85,39 @@ public class PromptPanel extends JPanel {
         JPanel headsPanel = new JPanel(new FlowLayout());
         headsPanel.setPreferredSize(new Dimension(600,150));
 
-        JPanel foodPanel = new JPanel(new FlowLayout());
-        foodPanel.setOpaque(false);
+        JPanel foodChoicePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        foodChoicePanel.setOpaque(false);
 
-        JLabel momHead = new JLabel( new ImageIcon(this.getClass().getResource("mom-head.png")));
-        JLabel dadHead = new JLabel(new ImageIcon(this.getClass().getResource("dad-head.png")));
-        JLabel canLab = new JLabel(resize(new ImageIcon(this.getClass().getResource("soup-can.png"))));
-        JLabel bottleLab = new JLabel(resize(new ImageIcon(this.getClass().getResource("water-bottle.png"))));
-        JLabel canLab2 = new JLabel(resize(new ImageIcon(this.getClass().getResource("soup-can.png"))));
-        JLabel bottleLab2 = new JLabel(resize(new ImageIcon(this.getClass().getResource("water-bottle.png"))));
-
+        JLabel momHead = new JLabel( new ImageIcon("C0de_322/source/img/mom-head.png"));
+        JLabel dadHead = new JLabel(new ImageIcon("C0de_322/source/img/dad-head.png"));
+        JLabel canLab = new JLabel(resize(new ImageIcon("C0de_322/source/img/soup-can.png")));
+        JLabel bottleLab = new JLabel(resize(new ImageIcon("C0de_322/source/img/water-bottle.png")));
         southPanel.setOpaque(false);
         headsPanel.setOpaque(false);
 
-        foodPanel.add(new JButton("-"));
-        foodPanel.add(canLab);
-        foodPanel.add(new JButton("+"));
-        foodPanel.add(new JButton("-"));
-        foodPanel.add(bottleLab);
-        foodPanel.add(new JButton("+"));
+        AddButton addButton = new AddButton();
+        RemoveButton removeButton = new RemoveButton();
+        AddButton addButton2 = new AddButton();
+        RemoveButton removeButton2 = new RemoveButton();
+        JPanel emptyPanel = new JPanel();
+        emptyPanel.setOpaque(false);
+        emptyPanel.setPreferredSize(new Dimension(100,100));
+
+        foodChoicePanel.add(removeButton);
+        foodChoicePanel.add(canLab);
+        foodChoicePanel.add(addButton);
+
+        foodChoicePanel.add(emptyPanel);
+
+        foodChoicePanel.add(removeButton2);
+        foodChoicePanel.add(bottleLab);
+        foodChoicePanel.add(addButton2);
 
         headsPanel.add(momHead);
         headsPanel.add(dadHead);
 
         southPanel.add(headsPanel,BorderLayout.NORTH);
-        southPanel.add(foodPanel,BorderLayout.SOUTH);
+        southPanel.add(foodChoicePanel,BorderLayout.SOUTH);
         add(southPanel,BorderLayout.SOUTH);
     }
 }
