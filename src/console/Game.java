@@ -46,19 +46,19 @@ public class Game {
         return menu;
     }
 
-    public void test() {
+    public void menuDaily() {
         Menu menu = this.daily();
         menu.displayAndWaitChoice();
     }
 
     public void eat(int nbr) {
         characters.get(nbr).setHunger(3);
-        test();
+        menuDaily();
     }
 
     public void drink(int nbr) {
         characters.get(nbr).setThirty(2);
-        test();
+        menuDaily();
     }
 
     public void create(int nbr) {
@@ -69,7 +69,7 @@ public class Game {
             characters.add(character);
         }
         story();
-        test();
+        menuDaily();
     }
 
     public void story(){
@@ -128,7 +128,7 @@ public class Game {
                 goodEnd();
             } else {
                 setDay(1);
-                test();
+                menuDaily();
             }
         }
     }
@@ -191,7 +191,7 @@ public class Game {
             Character character = characters.remove(index);
             expedition.add(character);
         }
-        test();
+        menuDaily();
     }
 
 }
