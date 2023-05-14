@@ -1,4 +1,4 @@
-package game;
+package start;
 
 import com.google.gson.Gson;
 
@@ -10,10 +10,8 @@ import java.util.Scanner;
 
 public class Game {
     private int day = 0;
-    private boolean game = true;
-
+    private int timeExpedition = 2;
     private List<String> log = List.of(new String[]{"rien"});
-
     List<Character> pj = new ArrayList<>();
     List<Character> expedition = new ArrayList<>();
 
@@ -30,33 +28,36 @@ public class Game {
         pj.get(nbr).setCrazy(true);
     }
 
-    public void daily() {
+public Menu daily2() {
         log();
-        while (game) {
-            Menu menu = new Menu( "\n-- day : "+ getDay() + " --");
-            for (int i = 0 ; i < pj.size() ; i++) {
-                int finalI = i;
-                menu.addItem(new MenuItem("nourir " + pj.get(i).getName(), () -> eat(finalI)));
+        Menu menu = new Menu( "\n-- day2 : "+ getDay() + " --");
+        for (int i = 0 ; i < pj.size() ; i++) {
+            int finalI = i;
+            menu.addItem(new MenuItem("nourir " + pj.get(i).getName(), () -> eat(finalI)));
 
-            }
-            for (int i = 0 ; i < pj.size() ; i++) {
-                int finalI = i;
-                menu.addItem(new MenuItem("abreuver " + pj.get(i).getName(), () -> drink(finalI)));
-
-            }
-            menu.addItem(new MenuItem("continuer", this::next));
-            menu.addItem(new MenuItem("quitter", this::quite));
-            menu.displayAndWaitChoice();
         }
+        for (int i = 0 ; i < pj.size() ; i++) {
+            int finalI = i;
+            menu.addItem(new MenuItem("abreuver " + pj.get(i).getName(), () -> drink(finalI)));
+
+        }
+        menu.addItem(new MenuItem("continuer", this::nextExpedition));
+        menu.addItem(new MenuItem("quitter", this::quite));
+        return menu;
+    }
+
+    public void test() {
+        Menu menue = this.daily2();
+        menue.displayAndWaitChoice();
     }
 
     public void eat(int nbr) {
         pj.get(nbr).setHunger(3);
-       this.daily();
+        test();
     }
     public void drink(int nbr) {
         pj.get(nbr).setThirty(2);
-        this.daily();
+        test();
     }
 
     public void create(int nbr) {
@@ -66,8 +67,8 @@ public class Game {
             Character character = new Character(name.nextLine());
             pj.add(character);
         }
-        story();
-        daily();
+//        story();
+        test();
     }
 
     public void story(){
@@ -91,54 +92,61 @@ public class Game {
 
     }
 
-
-
-    public void next() {
+    public void nextExpedition() {
         int i = 0;
 
-        while (i < pj.size()) {
-            crazy(i);
-
-            pj.get(i).setHunger(-1);
-            pj.get(i).setThirty(-1);
-
-            if (pj.get(i).getHunger() == 0 || pj.get(i).getThirty() == 0) {
-                System.out.println(pj.get(i).getName() + " est mort(e)");
-                pj.remove(pj.get(i));
-            } else {
-                i++;
+        if (timeExpedition == 1) {
+            timeExpedition = 8;
+            Menu menu = this.expedition();
+            menu.displayAndWaitChoice();
+        } else {
+            timeExpedition--;
+            if (expedition.size() != 0) {
+                expedition.get(0).setTime(-1);
+                if (expedition.get(0).getTime() == 0) {
+                    Character character = expedition.remove(0);
+                    pj.add(character);
+                }
             }
 
+            while (i < pj.size()) {
+                crazy(i);
+
+                pj.get(i).setHunger(-1);
+                pj.get(i).setThirty(-1);
+
+                if (pj.get(i).getHunger() == 0 || pj.get(i).getThirty() == 0) {
+                    System.out.println(pj.get(i).getName() + " est mort(e)");
+                    pj.remove(pj.get(i));
+                } else {
+                    i++;
+                }
+            }
+
+            if (pj.size() == 0 && expedition.size() == 0) {
+                badEnd();
+            } else if (day == 10) {
+                goodEnd();
+            } else {
+                setDay(1);
+                test();
+            }
         }
-
-
-        if (pj.size() == 0) {
-            badEnd();
-        } else if (day == 10) {
-            goodEnd();
-        } else {
-            setDay(1);
-            daily();
-        }
-
     }
 
     public void quite() {
         typing("sauvegarde...",200);
         System.out.println("\nterminer");
         save("game_data.json");
-        game = false;
     }
 
     public void badEnd() {
         typing("ils sont venus me chercher et il ne rester plus personne pour dire quelque chose...\n", 190);
-        this.game = false;
         restart();
     }
 
     public void goodEnd() {
         typing("ils sont venus me chercher mais il ne mon pas trouvé...\n", 40);
-        this.game = false;
         restart();
     }
     public void restart() {
@@ -169,4 +177,24 @@ public class Game {
             }
         }
     }
+
+    public Menu expedition() {
+        Menu menu = new Menu("\n=-- Expedition --=");
+        for (int i = 0; i < pj.size() ; i++) {
+            int finalI = i;
+            menu.addItem(new MenuItem(pj.get(i).getName(), () -> moveCharacterToExpedition(finalI)));
+        }
+        return menu;
+    }
+
+    public void moveCharacterToExpedition(int index) {
+        if (index >= 0 && index < pj.size()) {
+            Character character = pj.remove(index);
+            expedition.add(character);
+        }
+        test();
+    }
+
 }
+
+

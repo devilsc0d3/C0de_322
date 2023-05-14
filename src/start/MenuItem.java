@@ -1,4 +1,4 @@
-package game;
+package start;
 
 public record MenuItem(String label, Runnable action) {
 
