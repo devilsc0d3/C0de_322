@@ -12,7 +12,7 @@ public class Game {
     private int day = 0;
     private int timeExpedition = 2;
     private List<String> log = List.of(new String[]{"rien"});
-    List<Character> pj = new ArrayList<>();
+    List<Character> characters = new ArrayList<>();
     List<Character> expedition = new ArrayList<>();
 
     public int getDay() {
@@ -24,39 +24,40 @@ public class Game {
     }
 
     public void crazy(int nbr) {
-        System.out.println(pj.get(nbr).isCrazy());
-        pj.get(nbr).setCrazy(true);
+        System.out.println(characters.get(nbr).isCrazy());
+        characters.get(nbr).setCrazy(true);
     }
 
-public Menu daily2() {
+    public Menu daily() {
         log();
         Menu menu = new Menu( "\n-- day2 : "+ getDay() + " --");
-        for (int i = 0 ; i < pj.size() ; i++) {
+        for (int i = 0; i < characters.size() ; i++) {
             int finalI = i;
-            menu.addItem(new MenuItem("nourir " + pj.get(i).getName(), () -> eat(finalI)));
+            menu.addItem(new MenuItem("nourir " + characters.get(i).getName(), () -> eat(finalI)));
 
         }
-        for (int i = 0 ; i < pj.size() ; i++) {
+        for (int i = 0; i < characters.size() ; i++) {
             int finalI = i;
-            menu.addItem(new MenuItem("abreuver " + pj.get(i).getName(), () -> drink(finalI)));
+            menu.addItem(new MenuItem("abreuver " + characters.get(i).getName(), () -> drink(finalI)));
 
         }
-        menu.addItem(new MenuItem("continuer", this::nextExpedition));
+        menu.addItem(new MenuItem("continuer", this::keepGoingStory));
         menu.addItem(new MenuItem("quitter", this::quite));
         return menu;
     }
 
     public void test() {
-        Menu menue = this.daily2();
-        menue.displayAndWaitChoice();
+        Menu menu = this.daily();
+        menu.displayAndWaitChoice();
     }
 
     public void eat(int nbr) {
-        pj.get(nbr).setHunger(3);
+        characters.get(nbr).setHunger(3);
         test();
     }
+
     public void drink(int nbr) {
-        pj.get(nbr).setThirty(2);
+        characters.get(nbr).setThirty(2);
         test();
     }
 
@@ -65,9 +66,9 @@ public Menu daily2() {
             Scanner name = new Scanner(System.in);
             System.out.println("choisit un prenom au personnage " + (i+1));
             Character character = new Character(name.nextLine());
-            pj.add(character);
+            characters.add(character);
         }
-//        story();
+        story();
         test();
     }
 
@@ -81,7 +82,6 @@ public Menu daily2() {
 				Arriveront-ils a restituer la paix ?
 				""", 40);
         System.out.println("---------------------------------------------" + "--------" + "---------------------------------------------");
-
     }
 
     public void log() {
@@ -89,10 +89,9 @@ public Menu daily2() {
 //        System.out.println(log.get(day));
         System.out.println("\n\n\n\n\n\n\n");
         System.out.println("---------------------------------------------" + "---" + "---------------------------------------------");
-
     }
 
-    public void nextExpedition() {
+    public void keepGoingStory() {
         int i = 0;
 
         if (timeExpedition == 1) {
@@ -105,25 +104,25 @@ public Menu daily2() {
                 expedition.get(0).setTime(-1);
                 if (expedition.get(0).getTime() == 0) {
                     Character character = expedition.remove(0);
-                    pj.add(character);
+                    characters.add(character);
                 }
             }
 
-            while (i < pj.size()) {
+            while (i < characters.size()) {
                 crazy(i);
 
-                pj.get(i).setHunger(-1);
-                pj.get(i).setThirty(-1);
+                characters.get(i).setHunger(-1);
+                characters.get(i).setThirty(-1);
 
-                if (pj.get(i).getHunger() == 0 || pj.get(i).getThirty() == 0) {
-                    System.out.println(pj.get(i).getName() + " est mort(e)");
-                    pj.remove(pj.get(i));
+                if (characters.get(i).getHunger() == 0 || characters.get(i).getThirty() == 0) {
+                    System.out.println(characters.get(i).getName() + " est mort(e)");
+                    characters.remove(characters.get(i));
                 } else {
                     i++;
                 }
             }
 
-            if (pj.size() == 0 && expedition.size() == 0) {
+            if (characters.size() == 0 && expedition.size() == 0) {
                 badEnd();
             } else if (day == 10) {
                 goodEnd();
@@ -180,16 +179,16 @@ public Menu daily2() {
 
     public Menu expedition() {
         Menu menu = new Menu("\n=-- Expedition --=");
-        for (int i = 0; i < pj.size() ; i++) {
+        for (int i = 0; i < characters.size() ; i++) {
             int finalI = i;
-            menu.addItem(new MenuItem(pj.get(i).getName(), () -> moveCharacterToExpedition(finalI)));
+            menu.addItem(new MenuItem(characters.get(i).getName(), () -> moveCharacterToExpedition(finalI)));
         }
         return menu;
     }
 
     public void moveCharacterToExpedition(int index) {
-        if (index >= 0 && index < pj.size()) {
-            Character character = pj.remove(index);
+        if (index >= 0 && index < characters.size()) {
+            Character character = characters.remove(index);
             expedition.add(character);
         }
         test();
