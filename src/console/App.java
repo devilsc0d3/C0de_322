@@ -74,7 +74,7 @@ public class App {
 	 * @param nbr the number of the selected place
 	 */
 	private void begin(int nbr) {
-		Game game = new Game();
+		Game game = new Game(nbr);
 		game.create(nbr);
 	}
 

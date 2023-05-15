@@ -4,9 +4,7 @@ import com.google.gson.Gson;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * The Game class represents the game state and functionality.
@@ -14,12 +12,45 @@ import java.util.Scanner;
  * It also provides methods for saving and loading the game.
  */
 public class Game implements Loggable, Eatable, Drinkable, Creatable, StoryTeller, EndHandler, Saveable {
-    private int day = 0;
-    private int timeExpedition = 2;
-    private final List<String> log = new ArrayList<>();
-    private String logTemp = "";
-    List<Character> characters = new ArrayList<>();
-    List<Character> expedition = new ArrayList<>();
+    private int day;
+    private int timeExpedition;
+    private final List<String> log;
+    private String logTemp;
+    private final List<Character> characters;
+    private final List<Character> expedition;
+    private final List<Item> items;
+    private final Map<String, List<Item>> itemstest;
+
+
+    public Game(int difficulty) {
+        day = 0;
+        timeExpedition = 2;
+        log = new ArrayList<>();
+        logTemp = "";
+        characters = new ArrayList<>();
+        expedition = new ArrayList<>();
+        items = new ArrayList<>();
+        itemstest = new HashMap<>();
+        itemstest.put("water", new ArrayList<>());
+        itemstest.put("drink", new ArrayList<>());
+        itemstest.put("weapon", new ArrayList<>());
+        itemstest.put("other", new ArrayList<>());
+
+
+        int nbrItems;
+        if (difficulty == 1) {
+            nbrItems = 10;
+        } else if (difficulty == 2) {
+            nbrItems = 8;
+        } else {
+            nbrItems = 5;
+        }
+        for (int i = 0 ;i < nbrItems; i++) {
+            addWater();
+            addConservatoryBox();
+        }
+    }
+
 
     /**
      * Returns the current day of the game.
@@ -126,7 +157,7 @@ public class Game implements Loggable, Eatable, Drinkable, Creatable, StoryTelle
      * Prints the log for the current day.
      */
     public void log() {
-        System.out.println("\n--------------------- " + "log" + " ------------------------------");
+        System.out.println("\n----------------- " + "log of day "+ day + " --------------------------");
         System.out.print(log.get(day));
         System.out.println("-----------------------" + "---" + "-------------------------------");
     }
@@ -302,6 +333,40 @@ public class Game implements Loggable, Eatable, Drinkable, Creatable, StoryTelle
             log.add(logday.toString());
             logTemp = "";
         }
+
+
+    public List<Item> createWeapon() {
+        List<Item> weapons = new ArrayList<>();
+        Item weapon = new Weapon("Batte de baseball", "Une puissante ",2);
+        Item weapon2 = new Weapon("Batte de baseball", "Une puissante ",2);
+        Item weapon3 = new Weapon("Batte de baseball", "Une puissante ",2);
+        Item weapon4 = new Weapon("Batte de baseball", "Une puissante ",2);
+        weapons.add(weapon);
+        weapons.add(weapon2);
+        weapons.add(weapon3);
+        weapons.add(weapon4);
+        return weapons;
+    }
+    public void addWeapon(){
+        Item weapon = (Item) createWeapon();
+        items.add(weapon);
+    }
+    public Item createWater(){
+        return new Need(2, "Water");
+    }
+    public void addWater(){
+        Item water = createWater();
+        items.add(water);
+    }
+    public Item createConservatoryBox(){
+        return new Need(3, "ConservativBox");
+    }
+    public void addConservatoryBox(){
+        Item conservatoryBox = createConservatoryBox();
+        items.add(conservatoryBox);
+    }
+
+    //TODO transform list to map -> verif key
 
 }
 
