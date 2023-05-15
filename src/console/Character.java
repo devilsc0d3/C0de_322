@@ -9,7 +9,6 @@ public class Character {
     private int thirty;
     private final String name;
     private int hunger;
-    private boolean able;
     private int time;
 
     /**
@@ -22,7 +21,6 @@ public class Character {
         this.name = name;
         this.thirty = 2;
         this.hunger = 5;
-        this.able = true;
         this.time = 4;
     }
 
@@ -71,23 +69,6 @@ public class Character {
         this.hunger += hunger;
     }
 
-    /**
-     * Checks if the character is able.
-     *
-     * @return true if the character is able, false otherwise
-     */
-    public boolean isAble() {
-        return able;
-    }
-
-    /**
-     * Sets the ability status of the character.
-     *
-     * @param able the ability status to set
-     */
-    public void setAble(boolean able) {
-        this.able = able;
-    }
 
     /**
      * Returns the time value of the character.
