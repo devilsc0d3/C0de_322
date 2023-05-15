@@ -2,13 +2,12 @@ package main.java.start;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
+import java.util.List;
 
 public class LeftPanel extends JPanel {
     private final Map<JPanel, String> componentToConstraints = new HashMap<>();
-    private static PromptPanel promptPanel;
+    public  PromptPanel promptPanel;
 
     public LeftPanel(){
         setLayout(new CardLayout());
@@ -31,6 +30,9 @@ public class LeftPanel extends JPanel {
         if (!Objects.equals(getDisplayedCard(), "PROMPT")){
             cardLayout.show(this,"prompt");
             promptPanel.addPromptLabel();
+            if (!promptPanel.textDisplayed){
+                promptPanel.startTextDisplay();
+            }
         }else{
             cardLayout.show(this,"invi");
         }
@@ -44,8 +46,20 @@ public class LeftPanel extends JPanel {
                 return this.componentToConstraints.get(component);
             }
         }
-
         return null;
+    }
+
+    public List<AddButton> getAddButtons(){
+        List<AddButton> addButtons = new ArrayList<>();
+        addButtons.add(promptPanel.addButton);
+        addButtons.add(promptPanel.addButton2);
+        return addButtons;
+    }
+    public List<RemoveButton> getRemoveButtons(){
+        List<RemoveButton> removeButtons = new ArrayList<>();
+        removeButtons.add(promptPanel.removeButton);
+        removeButtons.add(promptPanel.removeButton2);
+        return removeButtons;
     }
 
 }

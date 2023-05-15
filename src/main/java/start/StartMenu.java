@@ -15,14 +15,14 @@ public class StartMenu extends BackgroundImage {
         JLabel titleLabel = new JLabel("CODE_322");
         titlePanel.setOpaque(false);
         titleLabel.setFont(new Font(Font.SERIF, Font.BOLD, 140));
-        titleLabel.setForeground(Color.GRAY);
+        titleLabel.setForeground(Color.GRAY.darker());
         titlePanel.add(titleLabel);
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setOpaque(false);
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS)); // Use BoxLayout with horizontal alignment
 
-        startButton = new JButton("Start Game");
+        startButton = new JButton("Start New Game");
         startButton.setFont(new Font(Font.SERIF, Font.PLAIN, 30));
         startButton.setForeground(Color.black);
         startButton.setUI(new StyledButtonUI());

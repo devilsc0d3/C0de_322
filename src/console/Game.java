@@ -34,7 +34,7 @@ public class Game {
         Menu menu = new Menu( "\n-- day : "+ getDay() + " --");
         for (int i = 0; i < characters.size() ; i++) {
             int finalI = i;
-            menu.addItem(new MenuItem("nourir " + characters.get(i).getName(), () -> eat(finalI)));
+            menu.addItem(new MenuItem("nourrir " + characters.get(i).getName(), () -> eat(finalI)));
 
         }
         for (int i = 0; i < characters.size() ; i++) {
@@ -140,12 +140,12 @@ public class Game {
     }
 
     public void badEnd() {
-        typing("ils sont venus me chercher et il ne rester plus personne pour dire quelque chose...\n", 190);
+        typing("ils sont venus me chercher et il ne restait plus personne pour dire quelque chose...\n", 190);
         restart();
     }
 
     public void goodEnd() {
-        typing("ils sont venus me chercher mais il ne mon pas trouvé...\n", 40);
+        typing("ils sont venus me chercher mais il ne m'ont pas trouvé...\n", 40);
         restart();
     }
     public void restart() {
@@ -171,7 +171,7 @@ public class Game {
                 Thread.sleep(time);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
-                System.err.println("La thread a été interrompue pendant la pause");
+                System.err.println("Le thread a été interrompue pendant la pause");
                 break;
             }
         }
@@ -202,9 +202,9 @@ public class Game {
         for (Character character : characters) {
 
             if (character.getThirty() == 0) {
-                logday.append(character.getName()).append(" est désydrater").append("\n");
+                logday.append(character.getName()).append(" est désydraté").append("\n");
             } else if (character.getThirty() == 1) {
-                logday.append(character.getName()).append(" commence a avoir soif").append("\n");
+                logday.append(character.getName()).append(" commence à avoir soif").append("\n");
             } else {
                 logday.append(character.getName()).append(" n'a pas envie de boire").append("\n");
             }
@@ -212,7 +212,7 @@ public class Game {
             if (character.getHunger() == 0) {
                 logday.append(character.getName()).append(" est affamé").append("\n");
             } else if (character.getThirty() == 1) {
-                logday.append(character.getName()).append(" commence a avoir faim").append("\n");
+                logday.append(character.getName()).append(" commence à avoir faim").append("\n");
             } else {
                 logday.append(character.getName()).append(" n'a pas envie de manger").append("\n");
             }

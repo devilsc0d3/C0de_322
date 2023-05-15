@@ -11,7 +11,6 @@ public class MainGamePanel extends JLayeredPane {
         addBackgroundPanel();
         addGamePanel();
     }
-
     public void addBackgroundPanel() {
         backgroundPanel = new BackgroundImage();
         backgroundPanel.setLayout(new BorderLayout());
@@ -20,9 +19,9 @@ public class MainGamePanel extends JLayeredPane {
     }
 
     public void addGamePanel() {
-        gamePanel = new Game();
+        gamePanel = new Game(2);
         gamePanel.setOpaque(false);
-        gamePanel.updateGameStat(15,10);
+        gamePanel.updateGameStat();
         gamePanel.setBounds(0, 0, 1600, 850);
         add(gamePanel, JLayeredPane.PALETTE_LAYER);
     }
