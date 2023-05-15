@@ -18,8 +18,7 @@ public class Game implements Loggable, Eatable, Drinkable, Creatable, StoryTelle
     private String logTemp;
     private final List<Character> characters;
     private final List<Character> expedition;
-    private final List<Item> items;
-    private final Map<String, List<Item>> itemstest;
+    private final Map<String, List<Item>> items;
 
 
     public Game(int difficulty) {
@@ -29,12 +28,11 @@ public class Game implements Loggable, Eatable, Drinkable, Creatable, StoryTelle
         logTemp = "";
         characters = new ArrayList<>();
         expedition = new ArrayList<>();
-        items = new ArrayList<>();
-        itemstest = new HashMap<>();
-        itemstest.put("water", new ArrayList<>());
-        itemstest.put("drink", new ArrayList<>());
-        itemstest.put("weapon", new ArrayList<>());
-        itemstest.put("other", new ArrayList<>());
+        items = new HashMap<>();
+        items.put("food", new ArrayList<>());
+        items.put("drink", new ArrayList<>());
+        items.put("weapon", new ArrayList<>());
+        items.put("other", new ArrayList<>());
 
 
         int nbrItems;
@@ -77,6 +75,7 @@ public class Game implements Loggable, Eatable, Drinkable, Creatable, StoryTelle
      */
     public Menu daily() {
         log();
+        inventory();
         Menu menu = new Menu( "\n-- day : "+ getDay() + " --");
         for (int i = 0; i < characters.size() ; i++) {
             int finalI = i;
@@ -107,7 +106,12 @@ public class Game implements Loggable, Eatable, Drinkable, Creatable, StoryTelle
      * @param nbr The index of the character.
      */
     public void eat(int nbr) {
-        characters.get(nbr).setHunger(3);
+        if (items.get("food").size() > 0) {
+            items.get("food").remove(0);
+            characters.get(nbr).setHunger(3);
+        } else {
+            System.out.println("\nc'est la hess niveau bouffe..");
+        }
         menuDaily();
     }
 
@@ -117,7 +121,12 @@ public class Game implements Loggable, Eatable, Drinkable, Creatable, StoryTelle
      * @param nbr The index of the character.
      */
     public void drink(int nbr) {
-        characters.get(nbr).setThirty(2);
+        if (items.get("drink").size() > 0) {
+            characters.get(nbr).setThirty(2);
+            items.get("drink").remove(0);
+        } else {
+            System.out.println("\nc'est la secheresse...");
+        }
         menuDaily();
     }
 
@@ -149,7 +158,7 @@ public class Game implements Loggable, Eatable, Drinkable, Creatable, StoryTelle
 				Il prend d’assaut les humains avec ses amis les robots.\s
 				Le monde est en train de sombrer mais un groupe de bras cassé est détérminé a renverser les IA.
 				Arriveront-ils a restituer la paix ?
-				""", 40);
+				""", 0);
         System.out.println("---------------------------------------------" + "--------" + "---------------------------------------------");
     }
 
@@ -160,6 +169,13 @@ public class Game implements Loggable, Eatable, Drinkable, Creatable, StoryTelle
         System.out.println("\n----------------- " + "log of day "+ day + " --------------------------");
         System.out.print(log.get(day));
         System.out.println("-----------------------" + "---" + "-------------------------------");
+    }
+
+    public void inventory() {
+        System.out.println("\n--- " + "inventaire" + "---");
+        System.out.println("nouriture : " + items.get("food").size());
+        System.out.println("eau : " + items.get("drink").size());
+        System.out.println("---" + "----------" + "---");
     }
 
     /**
@@ -179,6 +195,7 @@ public class Game implements Loggable, Eatable, Drinkable, Creatable, StoryTelle
                 if (expedition.get(0).getTime() == 0) {
                     Character character = expedition.remove(0);
                     characters.add(character);
+                    // TODO : math random pour expedition
                 }
             }
 
@@ -335,39 +352,28 @@ public class Game implements Loggable, Eatable, Drinkable, Creatable, StoryTelle
         }
 
 
-    public List<Item> createWeapon() {
-        List<Item> weapons = new ArrayList<>();
-        Item weapon = new Weapon("Batte de baseball", "Une puissante ",2);
-        Item weapon2 = new Weapon("Batte de baseball", "Une puissante ",2);
-        Item weapon3 = new Weapon("Batte de baseball", "Une puissante ",2);
-        Item weapon4 = new Weapon("Batte de baseball", "Une puissante ",2);
-        weapons.add(weapon);
-        weapons.add(weapon2);
-        weapons.add(weapon3);
-        weapons.add(weapon4);
-        return weapons;
+    public Item createWeapon(String txt, String desc, int durability) {
+        return new Weapon(txt,desc,durability);
     }
-    public void addWeapon(){
-        Item weapon = (Item) createWeapon();
-        items.add(weapon);
+    public void addWeapon(String txt, String desc, int durability){
+        Item weapon = createWeapon(txt, desc, durability);
+        items.get("weapon").add(weapon);
     }
     public Item createWater(){
         return new Need(2, "Water");
     }
     public void addWater(){
         Item water = createWater();
-        items.add(water);
+        items.get("drink").add(water);
     }
     public Item createConservatoryBox(){
-        return new Need(3, "ConservativBox");
+        return new Need(2, "ConservativBox");
     }
     public void addConservatoryBox(){
         Item conservatoryBox = createConservatoryBox();
-        items.add(conservatoryBox);
+        items.get("food").add(conservatoryBox);
+
     }
-
-    //TODO transform list to map -> verif key
-
 }
 
 
