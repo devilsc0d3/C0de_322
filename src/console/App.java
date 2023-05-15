@@ -36,9 +36,9 @@ public class App {
 
 	public void choice_place() {
 		Menu menu = new Menu("\n=-- lieux --=");
-		menu.addItem(new MenuItem("villa (facile)", () -> showt(3)));
+		menu.addItem(new MenuItem("villa (facile)", () -> showt(1)));
 		menu.addItem(new MenuItem("appartement (moyen)", () -> showt(2)));
-		menu.addItem(new MenuItem("petit grenier (difficile)", () -> showt(1)));
+		menu.addItem(new MenuItem("petit grenier (difficile)", () -> showt(3)));
 		menu.addItem(new MenuItem("retour", this::launch));
 		menu.displayAndWaitChoice();
 	}
