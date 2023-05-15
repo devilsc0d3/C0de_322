@@ -69,5 +69,38 @@ public class Game {
             System.err.println("La thread a été interrompue pendant la pause");
         }
     }
+    List<Item> items = new ArrayList<>();
+    public List<Item> createWeapon() {
+        List<Item> weapons = new ArrayList<>();
+        Item weapon = new Weapon("Batte de baseball", "Une puissante ",2);
+        Item weapon2 = new Weapon("Batte de baseball", "Une puissante ",2);
+        Item weapon3 = new Weapon("Batte de baseball", "Une puissante ",2);
+        Item weapon4 = new Weapon("Batte de baseball", "Une puissante ",2);
+        weapons.add(weapon);
+        weapons.add(weapon2);
+        weapons.add(weapon3);
+        weapons.add(weapon4);
+        return weapons;
+    }
+    public void addWeapon(){
+        Item weapon = (Item) createWeapon();
+        items.add(weapon);
+    }
+    public Item createWater(){
+        Item water = new Need(3, "Water");
+        return water;
+    }
+    public void addWater(){
+        Item water = createWater();
+        items.add(water);
+    }
+    public Item createConservativBox(){
+        Item conservativBox = new Need(3, "ConservativBox");
+        return conservativBox;
+    }
+    public void addConservativBox(){
+        Item conservativBox = createConservativBox();
+        items.add(conservativBox);
+    }
 }
 
