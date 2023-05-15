@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Game {
+public class Game implements Loggable, Eatable, Drinkable, Creatable, StoryTeller, EndHandler, Saveable {
     private int day = 0;
     private int timeExpedition = 2;
     private final List<String> log = new ArrayList<>();
