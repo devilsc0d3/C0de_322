@@ -50,7 +50,7 @@ public class Menu {
 				}
 			}catch(Exception e) {
 				System.out.println("Saisie invalide");
-				System.err.println("Error saving game: " + e.getMessage());
+//				System.err.println("Error saving game: " + e.getMessage());
 
 				this.scanner = new Scanner(System.in);
 			}			

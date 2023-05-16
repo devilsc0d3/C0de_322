@@ -160,7 +160,7 @@ public class Game implements Loggable, Eatable, Drinkable, Creatable, StoryTelle
 				Il prend d’assaut les humains avec ses amis les robots.\s
 				Le monde est en train de sombrer mais un groupe de bras cassé est détérminé a renverser les IA.
 				Arriveront-ils a restituer la paix ?
-				""", 0);
+				""", 40);
         System.out.println("---------------------------------------------" + "--------" + "---------------------------------------------");
     }
 
