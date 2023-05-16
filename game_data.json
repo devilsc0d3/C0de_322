@@ -1,1 +1,42 @@
-{"day":9,"timeExpedition":1,"log":["rv n\u0027a pas envie de boire\nrv n\u0027a pas envie de manger\n","rv commence a avoir soif\nrv commence a avoir faim\n","","","","","rv est désydrater\nrv n\u0027a pas envie de manger\n","rv commence a avoir soif\nrv n\u0027a pas envie de manger\n","rv est désydrater\nrv commence a avoir faim\n","rv n\u0027a pas envie de boire\nrv n\u0027a pas envie de manger\n"],"logTemp":"","characters":[{"thirty":3,"name":"rv","hunger":6,"able":true,"crazy":true,"time":0}],"expedition":[],"items":[]}
+{
+  "day": 0,
+  "timeExpedition": 2,
+  "logTemp": "",
+  "log": [
+    "d n\u0027a pas envie de boire\nd n\u0027a pas envie de manger\n"
+  ],
+  "characters": [
+    {
+      "thirty": 4,
+      "name": "d",
+      "hunger": 11,
+      "time": 4
+    }
+  ],
+  "expedition": [],
+  "items": {
+    "weapon": [],
+    "other": [],
+    "food": [
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "drink": [
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ]
+  }
+}

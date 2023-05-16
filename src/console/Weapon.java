@@ -1,24 +1,26 @@
 package console;
 
-public class Weapon extends Item{
-    String name;
-    String description;
-    int durability;
-    boolean broken = true;
+import java.io.Serializable;
+
+public class Weapon extends Item implements Serializable {
+    private final String itemName;
+    private final String description;
+    private final int durability;
+
     public Weapon(String name, String description,int durability){
-        this.name = name;
+        this.itemName = name;
         this.description = description;
         this.durability = durability;
     }
     public String getDescription(){
         return description;
     }
-    public String getName(){
-        return name;
+    public String getItemName(){
+        return itemName;
     }
 
     public void Broken(){
-        broken = false;
+        boolean broken = false;
         if (durability == 1){
             broken = true;
         }

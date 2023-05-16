@@ -33,13 +33,21 @@ public class App {
 	public Game read(String filePath) {
 		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
 			Gson gson = new Gson();
-			String json = reader.readLine();
+			StringBuilder jsonBuilder = new StringBuilder();
+			String line;
+			while ((line = reader.readLine()) != null) {
+				jsonBuilder.append(line);
+			}
+			String json = jsonBuilder.toString();
 			return gson.fromJson(json, Game.class);
 		} catch (IOException e) {
 			System.err.println("Error reading game file: " + e.getMessage());
 			return null;
 		}
 	}
+
+
+
 
 	/**
 	 * Generates the main menu of the application.

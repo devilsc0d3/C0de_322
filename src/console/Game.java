@@ -1,9 +1,13 @@
 package console;
 
-import com.google.gson.Gson;
+import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
+import java.io.Writer;
+import java.lang.reflect.Type;
 import java.util.*;
 
 /**
@@ -11,7 +15,7 @@ import java.util.*;
  * It manages the game day, characters, log, and various actions.
  * It also provides methods for saving and loading the game.
  */
-public class Game implements Loggable, Eatable, Drinkable, Creatable, StoryTeller, EndHandler, Saveable {
+public class Game implements Loggable, Eatable, Drinkable, Creatable, StoryTeller, EndHandler, Saveable, Serializable {
     private int day;
     private int timeExpedition;
     private final List<String> log;
@@ -43,10 +47,8 @@ public class Game implements Loggable, Eatable, Drinkable, Creatable, StoryTelle
         } else {
             nbrItems = 5;
         }
-        for (int i = 0 ;i < nbrItems; i++) {
-            addWater();
-            addConservatoryBox();
-        }
+        addWater(nbrItems);
+        addConservatoryBox(nbrItems);
     }
 
 
@@ -172,10 +174,10 @@ public class Game implements Loggable, Eatable, Drinkable, Creatable, StoryTelle
     }
 
     public void inventory() {
-        System.out.println("\n--- " + "inventaire" + "---");
+        System.out.println("\n--- " + "inventaire" + " ---");
         System.out.println("nouriture : " + items.get("food").size());
         System.out.println("eau : " + items.get("drink").size());
-        System.out.println("---" + "----------" + "---");
+        System.out.println("----" + "----------" + "----");
     }
 
     /**
@@ -193,9 +195,15 @@ public class Game implements Loggable, Eatable, Drinkable, Creatable, StoryTelle
             if (expedition.size() != 0) {
                 expedition.get(0).setTime(-1);
                 if (expedition.get(0).getTime() == 0) {
+                    expedition.get(0).setTime(4);
                     Character character = expedition.remove(0);
                     characters.add(character);
-                    // TODO : math random pour expedition
+
+                    Random random = new Random();
+                    int randomNumber = random.nextInt(6);
+                    addWater(randomNumber);
+                    randomNumber = random.nextInt(6);
+                    addConservatoryBox(randomNumber);
                 }
             }
 
@@ -264,15 +272,44 @@ public class Game implements Loggable, Eatable, Drinkable, Creatable, StoryTelle
      * @param path The path of the file to save the game data to.
      */
     public void save(String path) {
-        Gson gson = new Gson();
-        String json = gson.toJson(this);
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        JsonObject gameData = new JsonObject();
 
-        try (FileWriter writer = new FileWriter(path)) {
-            writer.write(json);
+        gameData.addProperty("day", day);
+        gameData.addProperty("timeExpedition", timeExpedition);
+        gameData.addProperty("logTemp", logTemp);
+
+        // Convertir la liste log en un tableau JSON
+        JsonArray logJson = gson.toJsonTree(log).getAsJsonArray();
+        gameData.add("log", logJson);
+
+        // Convertir la liste characters en un tableau JSON
+        JsonArray charactersJson = gson.toJsonTree(characters).getAsJsonArray();
+        gameData.add("characters", charactersJson);
+
+        // Convertir la liste expedition en un tableau JSON
+        JsonArray expeditionJson = gson.toJsonTree(expedition).getAsJsonArray();
+        gameData.add("expedition", expeditionJson);
+
+        // Convertir la map d'items en un objet JSON
+        JsonObject itemsJson = new JsonObject();
+        for (Map.Entry<String, List<Item>> entry : items.entrySet()) {
+            String key = entry.getKey();
+            List<Item> value = entry.getValue();
+            JsonArray itemListJson = gson.toJsonTree(value).getAsJsonArray();
+            itemsJson.add(key, itemListJson);
+        }
+        gameData.add("items", itemsJson);
+
+        try (Writer writer = new FileWriter(path)) {
+            gson.toJson(gameData, writer);
+            System.out.println("Game saved successfully.");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Error saving game: " + e.getMessage());
         }
     }
+
+
 
     /**
      * Displays typing effect for the given text.
@@ -362,17 +399,21 @@ public class Game implements Loggable, Eatable, Drinkable, Creatable, StoryTelle
     public Item createWater(){
         return new Need(2, "Water");
     }
-    public void addWater(){
-        Item water = createWater();
-        items.get("drink").add(water);
+    public void addWater(int nbr){
+        for (int i = 0 ; i < nbr ; i++) {
+            Item water = createWater();
+            items.get("drink").add(water);
+        }
+
     }
     public Item createConservatoryBox(){
         return new Need(2, "ConservativBox");
     }
-    public void addConservatoryBox(){
-        Item conservatoryBox = createConservatoryBox();
-        items.get("food").add(conservatoryBox);
-
+    public void addConservatoryBox(int nbr){
+        for (int i = 0 ; i < nbr ; i++) {
+            Item conservatoryBox = createConservatoryBox();
+            items.get("food").add(conservatoryBox);
+        }
     }
 }
 

@@ -1,17 +1,19 @@
 package console;
 
-public class Need extends Item{
+import java.io.Serializable;
+
+public class Need extends Item implements Serializable {
     int nbr;
-    String name;
-    public Need(int nbr, String name){
-        this.name = name;
+    private String itemName;
+    public Need(int nbr, String itemName){
+        this.itemName = itemName;
         this.nbr = nbr;
     }
     public int getNbr(){
         return nbr;
     }
 
-    public String getName(){
-        return name;
+    public String getItemName(){
+        return itemName;
     }
 }

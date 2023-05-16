@@ -1,11 +1,13 @@
 package console;
 
+import java.io.Serializable;
+
 /**
  The Character class represents a character in a console game.
  It stores information about the character's attributes and provides
  methods to access and modify them.
  */
-public class Character {
+public class Character implements Serializable {
     private int thirty;
     private final String name;
     private int hunger;
