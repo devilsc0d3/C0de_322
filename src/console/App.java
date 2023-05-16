@@ -6,17 +6,39 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+
+ The App class represents the main application class.
+
+ It contains methods for launching the application, reading game data,
+
+ generating the main menu, and handling menu choices.
+ */
 public class App {
 
+	/**
+	 * Launches the application by generating the main menu and displaying it.
+	 */
 	public void launch() {
 		Menu menu = this.generateMainMenu();
 		menu.displayAndWaitChoice();
 	}
 
+	/**
+	 * Reads game data from the specified file path and returns a Game object.
+	 *
+	 * @param filePath the path to the game data file
+	 * @return the Game object read from the file, or null if an error occurred
+	 */
 	public Game read(String filePath) {
 		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
 			Gson gson = new Gson();
-			String json = reader.readLine();
+			StringBuilder jsonBuilder = new StringBuilder();
+			String line;
+			while ((line = reader.readLine()) != null) {
+				jsonBuilder.append(line);
+			}
+			String json = jsonBuilder.toString();
 			return gson.fromJson(json, Game.class);
 		} catch (IOException e) {
 			System.err.println("Error reading game file: " + e.getMessage());
@@ -24,6 +46,14 @@ public class App {
 		}
 	}
 
+
+
+
+	/**
+	 * Generates the main menu of the application.
+	 *
+	 * @return the generated main menu
+	 */
 	public Menu generateMainMenu() {
 		Menu menu = new Menu("\n=-- Menu principal --=");
 		menu.addItem(new MenuItem("Jouer", this::choice_place));
@@ -34,26 +64,40 @@ public class App {
 		return menu;
 	}
 
+	/**
+	 * Handles the choice of a place from the menu and displays relevant information.
+	 */
 	public void choice_place() {
 		Menu menu = new Menu("\n=-- lieux --=");
-		menu.addItem(new MenuItem("villa (facile)", () -> showt(3)));
-		menu.addItem(new MenuItem("appartement (moyen)", () -> showt(2)));
-		menu.addItem(new MenuItem("petit grenier (difficile)", () -> showt(1)));
+		menu.addItem(new MenuItem("villa (facile)", () -> begin(1)));
+		menu.addItem(new MenuItem("appartement (moyen)", () -> begin(2)));
+		menu.addItem(new MenuItem("petit grenier (difficile)", () -> begin(3)));
 		menu.addItem(new MenuItem("retour", this::launch));
 		menu.displayAndWaitChoice();
 	}
 
-	private void showt(int nbr) {
-		Game game = new Game();
+	/**
+	 * Displays information about the selected place.
+	 *
+	 * @param nbr the number of the selected place
+	 */
+	private void begin(int nbr) {
+		Game game = new Game(nbr);
 		game.create(nbr);
 	}
 
+	/**
+	 * Loads the last saved game and displays the daily menu.
+	 */
 	public void last_save() {
 		Game game = read("./game_data.json");
 		game.menuDaily();
 
 	}
 
+	/**
+	 * Displays the credits.
+	 */
 	public void credit() {
 		typing("\nCredit\n",200);
 		System.out.println("Fauré Léo");
@@ -68,11 +112,21 @@ public class App {
 		launch();
 	}
 
+	/**
+	 * Displays that the languages option coming soon.
+	 */
 	public void language() {
 		System.out.println("Bientot Disponible !\n");
 		this.launch();
 	}
 
+
+	/**
+	 * Displays a text with a typing effect.
+	 *
+	 * @param txt  the text to display
+	 * * @param time the time delay between characters in milliseconds
+	 */
 	public void typing(String txt, int time) {
 		try {
 			for (int i = 0; i < txt.length(); i++) {
