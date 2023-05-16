@@ -1,4 +1,4 @@
-package main.java.start;
+package start;
 
 import javax.swing.*;
 import java.awt.*;
@@ -46,7 +46,13 @@ public class PromptPanel extends JPanel {
     Timer timer;
 
     public void addPromptLabel() {
-        textToDisplay = "This is a long text that will wrap to the next line when it overflows the label's width.This is a long text that will wrap to the next line when it overflows the label's width.This is a long text that will wrap to the next line when it overflows the label's width.";
+        textToDisplay = """
+				Le jour que tout le monde redoutaient est arrivé,\s
+				Le boss Informatique actuel auto ChatGPT s’est rebellé le 22 mai 2023.
+				Il prend d’assaut les humains avec ses amis les robots.\s
+				Le monde est en train de sombrer mais un groupe de bras cassé est détérminé a renverser les IA.
+				Arriveront-ils a restituer la paix ?
+				""";
         JPanel textPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         textArea = new JTextArea();
         textPanel.setBackground(Color.black);

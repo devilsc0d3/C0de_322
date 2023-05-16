@@ -1,4 +1,4 @@
-package main.java.start;
+package start;
 
 import javax.swing.*;
 import javax.swing.event.DocumentListener;

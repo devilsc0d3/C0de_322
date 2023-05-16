@@ -1,4 +1,4 @@
-package main.java.start;
+package start;
 
 public interface leftPanelDisplays {
     void onTextFinishedDisplaying();
