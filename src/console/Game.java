@@ -238,7 +238,6 @@ public class Game implements Loggable, Eatable, Drinkable, Creatable, StoryTelle
      */
     public void quite() {
         typing("sauvegarde...",200);
-        System.out.println("\nterminer");
         save("game_data.json");
     }
 
