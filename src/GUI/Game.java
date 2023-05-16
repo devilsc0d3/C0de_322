@@ -1,11 +1,9 @@
-package start;
+package GUI;
 
 import javax.swing.*;
-import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.EventListener;
 
 public class Game extends JPanel {
     private final JPanel canPanel;

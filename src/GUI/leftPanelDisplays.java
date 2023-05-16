@@ -1,4 +1,4 @@
-package start;
+package GUI;
 
 public interface leftPanelDisplays {
     void onTextFinishedDisplaying();
